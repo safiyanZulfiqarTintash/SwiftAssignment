@@ -9,9 +9,9 @@
 import Foundation
 import ObjectMapper
 
-class QualityObject: Mappable {
+@objc class QualityObject: NSObject, Mappable {
     var quality: String?
-    var url: Int?
+    var url: String?
     
     
     required init?(map: Map){

@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 
-class CardObject: Mappable {
+@objc class CardObject:NSObject, Mappable {
     var url: String?
     var height: Int?
     var width: Int?

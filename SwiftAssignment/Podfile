@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
 
@@ -9,6 +10,8 @@ target 'SwiftAssignment' do
   # Pods for SwiftAssignment
     pod 'Alamofire', '~> 4.2.0'
     pod 'AlamofireObjectMapper', '~> 4.0'
+    pod 'MBProgressHUD', '~> 1.0.0'
+    pod 'AlamofireImage'
   
 
 

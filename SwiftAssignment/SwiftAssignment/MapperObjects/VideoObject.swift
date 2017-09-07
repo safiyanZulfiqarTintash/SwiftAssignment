@@ -9,11 +9,11 @@
 import Foundation
 import ObjectMapper
 
-class VideoObject: Mappable {
+@objc class VideoObject:NSObject, Mappable {
     var title: String?
     var alternatives: [QualityObject]?
-    var type: Int?
-    var url: Int?
+    var type: String?
+    var url: String?
     
     required init?(map: Map){
         
