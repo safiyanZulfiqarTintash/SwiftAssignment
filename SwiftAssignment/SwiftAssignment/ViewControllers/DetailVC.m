@@ -9,10 +9,11 @@
 #import "DetailVC.h"
 #import "SwiftAssignment-Swift.h"
 
-@interface DetailVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface DetailVC () <UITableViewDelegate, UITableViewDataSource>
 {
-        MovieObject * movieBO;
+    MovieObject * movieBO;
 }
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tblViewConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblSynopsis;
@@ -26,18 +27,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-        [self populateUI];
+    [self populateUI];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma Mark - Helper Methods
--(void) populateUI
-{
+-(void) populateUI {
     movieBO = (MovieObject *)self.movieObject;
     [self.tblCast reloadData];
     self.tblViewConstraint.constant = self.tblCast.contentSize.height;
@@ -48,8 +46,7 @@
     [self loadImage];
 }
     
--(void) loadImage
-{
+-(void) loadImage {
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = true;
     self.imageView.image = [UIImage imageNamed:@"placeholder.png"];
@@ -65,24 +62,18 @@
     });
 
 }
-#pragma Mark- UITableView Delegate / UITableView DataSource
 
--(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
-{
+#pragma Mark- UITableView Delegate / UITableView DataSource
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return movieBO.casts.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString* identifier  = @"Cast Identifier";
-    
-    
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
@@ -95,17 +86,6 @@
     
     return cell;
 }
-    
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

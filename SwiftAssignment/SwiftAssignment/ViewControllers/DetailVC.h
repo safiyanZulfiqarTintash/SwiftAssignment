@@ -11,6 +11,6 @@
 
 @interface DetailVC : UIViewController
 
-    @property (strong, nonatomic) id movieObject;
+@property (strong, nonatomic) id movieObject;
     
 @end

@@ -22,8 +22,7 @@ final class NetworkManager {
     // MARK: Local Variable
     
     func fetchDataFromServer(completionHander:
-        @escaping ( _ movieData:[MovieObject]?, _ error :NSError?) -> Void)
-    {
+        @escaping ( _ movieData:[MovieObject]?, _ error :NSError?) -> Void) {
         let URL = "http://s3.amazonaws.com/vodassets/showcase.json"
         
         Alamofire.request(URL)
@@ -40,7 +39,7 @@ final class NetworkManager {
                         completionHander(nil , error as NSError)
                     
                     }
-        }
+            }
     }
 }
 

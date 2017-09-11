@@ -9,27 +9,21 @@
 import UIKit
 import MBProgressHUD
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController,UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var videosCollectionView: UICollectionView!
-    var moviesArr:[MovieObject] = []
-    var selectedMovie:MovieObject?
+    var moviesArr: [MovieObject] = []
+    var selectedMovie: MovieObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.callGetListOfMoviesAPI()
-        
-       
-    
+            self.callGetListOfMoviesAPI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    
-    // Mark: Navigation
+    // Mark: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail"
         {
@@ -37,33 +31,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-   // Mark: CollectionView Delegate and Data Source
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.moviesArr.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell {
-        //Do here
-       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCollectionCell", for: indexPath) as! VideoCollectionCell
-        let movieObject:MovieObject = self.moviesArr[indexPath.row]
-        cell.setCellData(movieObject)
-        return cell;
-        
-    }
-    
-   
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //Do here
-        let screenFrame = UIScreen.main.bounds
-        return CGSize(width: screenFrame.size.width/2 , height: 211);
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedMovie = self.moviesArr[indexPath.row]
-        self.performSegue(withIdentifier: "ShowDetail", sender: nil)
-    }
-    // Mark: API Calls
+    // Mark: - API Calls
     func callGetListOfMoviesAPI () {
        
        MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -71,14 +39,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         DataManager.shared.fetchData(){
             (movies:[MovieObject]?, error: NSError?) in
             
-            if let error = error
-            {
+            if let error = error {
                 print(error.localizedDescription)
             }
-            else
-            {
-                if let movies = movies
-                {
+            else {
+                if let movies = movies {
                     self.moviesArr = movies
                     // Sorting on basis of Rating ------------
                     self.moviesArr =  self.moviesArr.sorted(by: { $0.rating > $1.rating })
@@ -91,9 +56,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
             
         }
+        
+    }
+}
+
+// Mark: - UICollectionView Delegate and DataSource
+extension ViewController: UICollectionViewDelegate,UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return self.moviesArr.count
     }
     
-
-
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCollectionCell", for: indexPath) as! VideoCollectionCell
+        let movieObject: MovieObject = self.moviesArr[indexPath.row]
+        cell.setCellData(movieObject)
+        return cell;
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenFrame = UIScreen.main.bounds
+        return CGSize(width: screenFrame.size.width/2 , height: 211);
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedMovie = self.moviesArr[indexPath.row]
+        self.performSegue(withIdentifier: "ShowDetail", sender: nil)
+    }
+    
 }
+
 
