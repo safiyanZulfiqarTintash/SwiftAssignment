@@ -21,7 +21,6 @@ class VideoCollectionCell: UICollectionViewCell {
         self.contentView.autoresizingMask = UIViewAutoresizing.flexibleHeight
     }
     
-    
     func setCellData(_ movieObject: MovieObject)
     {
         if let year = movieObject.year
@@ -32,14 +31,14 @@ class VideoCollectionCell: UICollectionViewCell {
         {
             self.lblTitle.text = heading
         }
-//        if let rating = movieObject.rating
-//        {
-            self.lblRating.text = "\(movieObject.rating)"
-       // }
-//        else
-//        {
-//            self.lblRating.text = ""
-//        }
+        if let rating = movieObject.rating
+        {
+            self.lblRating.text = "\(rating)"
+        }
+        else
+        {
+            self.lblRating.text = "0"
+        }
         if let urlStr = movieObject.keyArtImages?[0].url
         {
             let url = URL(string: urlStr)!
@@ -51,15 +50,9 @@ class VideoCollectionCell: UICollectionViewCell {
                     // Handle error
                     return
                 }
-                // Do stuff with your image
                 self.imgView.image = image;
-                
-                
             }
             
         }
-        
-        
     }
-    
 }

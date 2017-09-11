@@ -20,7 +20,7 @@ import ObjectMapper
     var body : String?
     var year : String? // cell subtitle
     var duration : Int?
-    var rating : Int = 0
+    var rating : Int!
     var cardImages: [CardObject]?
     var videos : [VideoObject]?
     var casts : [CastObject]?
@@ -29,7 +29,7 @@ import ObjectMapper
     
     required init?(map: Map)
     {
-        
+        rating = 0;
     }
     
     func mapping(map: Map) {

@@ -19,8 +19,7 @@ final class DataManager {
     
     
     func fetchData(completionHander:
-        @escaping (_ movieData:[MovieObject]?,_ error :NSError?) -> Void)
-    {
+        @escaping (_ movieData:[MovieObject]?,_ error :NSError?) -> Void) {
         NetworkManager.shared.fetchDataFromServer() {(movies:[MovieObject]?, error: NSError?) in
             completionHander(movies, error)
         }
