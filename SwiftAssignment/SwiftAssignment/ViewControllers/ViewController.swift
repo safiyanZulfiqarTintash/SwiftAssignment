@@ -10,13 +10,14 @@ import UIKit
 import MBProgressHUD
 
 class ViewController: UIViewController,UICollectionViewDelegateFlowLayout {
+    
     @IBOutlet weak var videosCollectionView: UICollectionView!
-    var moviesArr: [MovieObject] = []
-    var selectedMovie: MovieObject?
+    
+    fileprivate var viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            self.callGetListOfMoviesAPI()
+        callGetListOfMoviesAPI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,49 +28,35 @@ class ViewController: UIViewController,UICollectionViewDelegateFlowLayout {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail"
         {
-            (segue.destination as! DetailVC).movieObject = self.selectedMovie!
+            (segue.destination as! DetailVC).movieObject = self.viewModel.selectedMovie!
         }
     }
     
     // Mark: - API Calls
     func callGetListOfMoviesAPI () {
-       
-       MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        DataManager.shared.fetchData(){
-            (movies:[MovieObject]?, error: NSError?) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                if let movies = movies {
-                    self.moviesArr = movies
-                    // Sorting on basis of Rating ------------
-                    self.moviesArr =  self.moviesArr.sorted(by: { $0.rating > $1.rating })
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        viewModel.callGetListOfMoviesAPI {
+            DispatchQueue.main.async {
+                if let error = self.viewModel.errorMessage {
+                    print (error)
+                } else {
                     self.videosCollectionView.reloadData()
                 }
-            }
-            
-            DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
-            
         }
-        
     }
 }
 
 // Mark: - UICollectionView Delegate and DataSource
 extension ViewController: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.moviesArr.count
+        return viewModel.moviesArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCollectionCell", for: indexPath) as! VideoCollectionCell
-        let movieObject: MovieObject = self.moviesArr[indexPath.row]
+        let movieObject: MovieObject = viewModel.moviesArr[indexPath.row]
         cell.setCellData(movieObject)
         return cell;
         
@@ -81,7 +68,7 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedMovie = self.moviesArr[indexPath.row]
+        viewModel.selectedMovie = viewModel.moviesArr[indexPath.row]
         self.performSegue(withIdentifier: "ShowDetail", sender: nil)
     }
     

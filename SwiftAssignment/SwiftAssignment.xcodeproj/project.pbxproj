@@ -26,6 +26,7 @@
 		C02E4BEF1F6120B40028225D /* VideoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E4BEE1F6120B40028225D /* VideoCollectionCell.swift */; };
 		C02E4BF21F612CAD0028225D /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = C02E4BF11F612CAD0028225D /* placeholder.png */; };
 		C02E4BF61F6142B70028225D /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C02E4BF51F6142B70028225D /* DetailVC.m */; };
+		C066C00B20408D7F00C3EE8C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C066C00A20408D7F00C3EE8C /* HomeViewModel.swift */; };
 		DF2806C242636706E8C2F401 /* Pods_SwiftAssignmentUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78BD2C5546CE8B13B071ACC /* Pods_SwiftAssignmentUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		C02E4BF31F6142B70028225D /* SwiftAssignment-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftAssignment-Bridging-Header.h"; sourceTree = "<group>"; };
 		C02E4BF41F6142B70028225D /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
 		C02E4BF51F6142B70028225D /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
+		C066C00A20408D7F00C3EE8C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F78BD2C5546CE8B13B071ACC /* Pods_SwiftAssignmentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAssignmentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				C029F5281F601646004B8D47 /* DataManager */,
 				C029F5291F601646004B8D47 /* MapperObjects */,
 				C029F52A1F601646004B8D47 /* NetworkManager */,
+				C066C00920408D7300C3EE8C /* ViewModels */,
 				C029F52B1F601646004B8D47 /* ViewControllers */,
 				C02E4BE91F611F6C0028225D /* Cells */,
 				C029F4E71F60035C004B8D47 /* SwiftAssignment */,
@@ -260,6 +263,15 @@
 			);
 			name = Resources;
 			path = SwiftAssignment/Resources;
+			sourceTree = "<group>";
+		};
+		C066C00920408D7300C3EE8C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C066C00A20408D7F00C3EE8C /* HomeViewModel.swift */,
+			);
+			name = ViewModels;
+			path = SwiftAssignment/ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -552,6 +564,7 @@
 				C029F5421F602091004B8D47 /* DataManager.swift in Sources */,
 				C029F53C1F601823004B8D47 /* NetworkManager.swift in Sources */,
 				C029F5381F601781004B8D47 /* ViewController.swift in Sources */,
+				C066C00B20408D7F00C3EE8C /* HomeViewModel.swift in Sources */,
 				C02E4BE61F611C170028225D /* MovieObject.swift in Sources */,
 				C02E4BE71F611C170028225D /* QualityObject.swift in Sources */,
 				C029F5341F601757004B8D47 /* AppDelegate.swift in Sources */,
